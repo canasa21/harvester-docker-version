@@ -1,0 +1,17 @@
+//$content = preg_replace('/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $content);
+
+     //remove inline styles
+        //$content = preg_replace('#style="[^\"]*"#','',$content);
+
+         //$HTML=$path_to_directory . '.html';
+        // deepcode ignore PT: <please specify a reason of ignoring this>
+
+        createDirectoryStructure($page_name,$incoming_path);
+
+        function createDirectoryStructure($page_name,$path_to_directory) {
+if (!file_exists($path_to_directory)) {
+    // deepcode ignore PT: <please specify a reason of ignoring this>
+    mkdir($path_to_directory, 0777, true);
+    //add page    
+    }
+}

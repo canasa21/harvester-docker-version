@@ -56,9 +56,23 @@ if ($result->num_rows > 0) {
         //$HTML=$path_to_directory . '.html';
         // deepcode ignore PT: <please specify a reason of ignoring this>
         $handlehtml=fopen($HTML, 'w');
-        $loadhtml='<h1>' . $title . '</h1>
-       
-                <body>' . $content . '</body>';
+        $loadhtml='
+                <!doctype html>
+                <html lang="'.$language.'">
+                <head>
+                <title>'.$title.'</title>
+                </head>
+                <body>
+                <li id="gcwu-gcnb-lang"><a href="'.$languageToggle.'" lang="fr">Fran&ccedil;ais</a></li>
+                <h1>'.$title.'</h1>
+                <main>'
+                .$content.
+                '</main><dl id="gcwu-date-mod">
+	            <dt>Date modified:</dt>
+	            <dd><span><time>'.$modified.'</time></span></dd>
+	            </dl>
+                </body>
+                </html>';
 
   
      

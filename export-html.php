@@ -2,7 +2,7 @@
 
 //define root folder
 
-$target_directory = "./wwwroothtml";
+$target_directory = "./wwwroot";
 
 include('include/db.php');
 
@@ -63,14 +63,29 @@ if ($result->num_rows > 0) {
                 <title>'.$title.'</title>
                 </head>
                 <body>
-                <li id="gcwu-gcnb-lang"><a href="'.$languageToggle.'" lang="fr">Fran&ccedil;ais</a></li>
-                <h1>'.$title.'</h1>
-                <main>'
+
+                <section id="wb-lng" class="col-xs-3 col-sm-12 pull-right text-right">
+                <h2 class="wb-inv">Language selection</h2>
+                <ul class="list-inline mrgn-bttm-0">
+                             <li>
+                                           <a lang="fr" hreflang="fr" href="'.$languageToggle.'">
+                                                         <span class="hidden-xs">Français</span>
+                                                         <abbr title="Français" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">fr</abbr>
+                                           </a>
+                             </li>
+                </ul>
+                </section>
+  
+                
+                <main class="container" property="mainContentOfPage" resource="#wb-main" typeof="WebPageElement">
+                <h1 id="wb-cont" property="name">'.$title.'</h1>'
                 .$content.
-                '</main><dl id="gcwu-date-mod">
+                '<div class="wet-boew-share"></div>
+                <dl id="wb-dtmd">
 	            <dt>Date modified:</dt>
-	            <dd><span><time>'.$modified.'</time></span></dd>
+	            <dd><time property="dateModified">'.$modified.'</time></dd>
 	            </dl>
+                </main>
                 </body>
                 </html>';
 

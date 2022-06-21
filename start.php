@@ -82,6 +82,7 @@ include('include/db.php');
 
     //for batch pages
     $sql = "select id, url from externalPages WHERE ID BETWEEN $threshold";
+    //$sql = "select id, url from externalPages WHERE ID IN(182)";
 
     $result = $conn->query($sql);
 

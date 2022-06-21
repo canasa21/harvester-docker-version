@@ -81,10 +81,12 @@ if ($result->num_rows > 0) {
                 <h1 id="wb-cont" property="name">'.$title.'</h1>'
                 .$content.
                 '<div class="wet-boew-share"></div>
+                <div class="pagedetails">
                 <dl id="wb-dtmd">
 	            <dt>Derni&egrave;re mise &agrave; jour :</dt>
 	            <dd><time property="dateModified">'.$modified.'</time></dd>
 	            </dl>
+                </div>
                 </main>
                 </body>
                 </html>';

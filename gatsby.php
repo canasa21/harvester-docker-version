@@ -1,6 +1,7 @@
 <?php 
 $gatsby = array(
     ".cfm"=>"",
+    "<h1 id=\"wb-cont\" property=\"name\"></h1>"=>"",
     "<br>" => "<br/>",
     "<hr>"=>"<hr/>",
     "<p>&nbsp;</p>" => "",
@@ -12,7 +13,9 @@ $gatsby = array(
     "onclick"=>"onClick",
     "/index\""=>"/\"",
     "/index#"=>"/#",
-    "wet-boew-tables"=>"wb-tables table",
+    "wet-boew-tables"=>"table table-bordered",
+    "<table border=\"1\"" => "<table class=\"table table-bordered\"",
+    "<table class=\"\"" => "<table class=\"table table-bordered\"",
     "allowfullscreen"=>"allowFullScreen"
 );
       ?>

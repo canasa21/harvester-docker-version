@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
         include('gatsby.php');
         $content = str_replace(array_keys($gatsby), $gatsby, $content);
 
-        //$content = preg_replace('/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $content);
+        $content = preg_replace('/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $content);
         $content = preg_replace('/className="\s*?"/','',$content);
         $content = preg_replace('/<!--(.|\s)*?-->/', '', $content);
         //add breaks

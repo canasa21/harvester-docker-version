@@ -70,7 +70,7 @@ li.current {
 
 ini_set('max_execution_time', '300');
 
-$threshold = htmlspecialchars($_GET['threshold']);
+//$threshold = htmlspecialchars($_GET['threshold']);
 
 
 include('simple_html_dom.php');
@@ -81,8 +81,8 @@ include('removals.php');
 include('include/db.php');
 
     //for batch pages
-    $sql = "select id, url from externalPages WHERE ID BETWEEN $threshold";
-    //$sql = "select id, url from externalPages WHERE ID IN(182)";
+    //$sql = "select id, url from externalPages WHERE ID BETWEEN $threshold";
+    $sql = "select id, url from externalPages WHERE ID IN(1662,2101)";
 
     $result = $conn->query($sql);
 
@@ -151,8 +151,8 @@ include('include/db.php');
     $content = preg_replace('#<div class="wet-boew-share(.*?)</div>#', '', $content);
     $content = preg_replace('#<dl id="gcwu-date-mod(.*?)</dl>#', '', $content);
     $content = str_replace('<div class="clearfix"></div>', '', $content);
-    $content = str_replace('<table class="width-100">', '<table class="wb-tables table">', $content);
-    $content = str_replace('<table>', '<table class="wb-tables table">', $content);
+    $content = str_replace('<table class="width-100">', '<table class="table table-bordered">', $content);
+    $content = str_replace('<table>', '<table class="table table-bordered">', $content);
     $content = preg_replace('#(<img[^>]+)(?<!\/)>#', '$1/>', $content); 
     $content = trim($content);
 
@@ -178,8 +178,8 @@ include('include/db.php');
     $translation_content = preg_replace('#<dl id="gcwu-date-mod(.*?)</dl>#', '', $translation_content);
     $translation_content = str_replace('’', '', $translation_content);
     $translation_content = str_replace('<div class="clearfix"></div>', '', $translation_content);
-    $translation_content = str_replace('<table class="width-100">', '<table class="wb-tables table">', $translation_content);
-    $translation_content = str_replace('<table>', '<table class="wb-tables table">', $translation_content);
+    $translation_content = str_replace('<table class="width-100">', '<table class="table table-bordered">', $translation_content);
+    $translation_content = str_replace('<table>', '<table class="table table-bordered">', $translation_content);
     $translation_content = preg_replace('#(<img[^>]*[^\/])>#', '$1/>', $translation_content); 
     $translation_content = trim($translation_content);
     
@@ -204,8 +204,12 @@ include('include/db.php');
     $translation_breadcrumbs = htmlspecialchars($translation_breadcrumbs, ENT_QUOTES);
     $translation_content = mysqli_real_escape_string($conn, $translation_content );
   
-    $sql = "INSERT INTO content_both_top_500 (name, link, title, breadcrumb, translation_title, translation_breadcrumb, language, translation_language, content, translation_content, status, modified, path, translation_path)
-    VALUES ('$name', '$myURL', '$title', ' $breadcrumbs', '$translation_title', '$translation_breadcrumbs', 'en', 'fr', '$content', '$translation_content', $status, '$modified', '$path', '$translation_path')";
+   $sql = "INSERT INTO content_both_top_500 (name, link, title, breadcrumb, translation_title, translation_breadcrumb, language, translation_language, content, translation_content, status, modified, path, translation_path)
+   VALUES ('$name', '$myURL', '$title', ' $breadcrumbs', '$translation_title', '$translation_breadcrumbs', 'en', 'fr', '$content', '$translation_content', $status, '$modified', '$path', '$translation_path')";
+
+
+    
+
 
     if ($conn->query($sql) === TRUE) {
       echo "\nNew record " . $ID . " created successfully<br>";
@@ -218,9 +222,9 @@ include('include/db.php');
     
     $conn->close();
 
-    echo ("<script>");
-    echo ('setTimeout("location.href = \'index.php\';",1500);');
-    echo ("</script>");
+      echo ("<script>");
+      echo ('setTimeout("location.href = \'index.php\';",1500);');
+      echo ("</script>");
     ?> 
 </body>
 </html>

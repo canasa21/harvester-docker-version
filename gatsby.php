@@ -16,6 +16,8 @@ $gatsby = array(
     "wet-boew-tables"=>"table table-bordered",
     "<table border=\"1\"" => "<table class=\"table table-bordered\"",
     "<table class=\"\"" => "<table class=\"table table-bordered\"",
-    "allowfullscreen"=>"allowFullScreen"
+    "<table class=\"wb-tables table\"" => "<table class=\"table table-bordered\"",
+    "allowfullscreen"=>"allowFullScreen",
+    "wet-boew-multimedia" => "wb-mltmd"
 );
       ?>

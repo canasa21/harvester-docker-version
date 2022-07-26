@@ -70,7 +70,8 @@ if ($result->num_rows > 0) {
                              <li>
                                            <a lang="en" hreflang="en" href="'.$languageToggle.'">
                                                          <span class="hidden-xs">English</span>
-                                                         <abbr title="Français" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">fr</abbr>
+                                                         <abbr title="English" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">en</abbr>
+
                                            </a>
                              </li>
                 </ul>

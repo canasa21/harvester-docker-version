@@ -82,7 +82,7 @@ include('include/db.php');
 
     //for batch pages
     //$sql = "select id, url from externalPages WHERE ID BETWEEN $threshold";
-    $sql = "select id, url from externalPages WHERE ID IN(1662,2101)";
+    $sql = "select id, url from externalPages WHERE ID IN(15,86)";
 
     $result = $conn->query($sql);
 
@@ -114,6 +114,47 @@ include('include/db.php');
     $modified = $html->find('time',0)->plaintext;
     }
 
+
+    if ($html->find('div[id="archived"]',0)){
+
+
+
+      //include('archive-eng.php');
+      
+      $content->find('div[id="archived"]',0)->innertext
+       = '';
+      
+      //$content->find('div#archived',0)->innertext = '';
+      
+      $content->find('div#archived',0)->outertext
+       = '<section id="archived" class="alert alert-warning wb-inview" data-inview="archived-bnr"><h2>Archived information</h2>
+      
+      <p>Archived information is provided for reference, research or recordkeeping purposes. It is not subject to the Government of Canada Web Standards and has not been altered or updated since it was archived. Please contact
+       us to request a format other than those available.</p>
+      
+      </section>
+      
+      
+      <section id="archived-bnr" class="wb-overlay modal-content overlay-def wb-bar-t">
+      
+      <header>
+      
+      <h2 class="wb-inv">Archived</h2>
+      
+      </header>
+      
+      <p><a href="#archived">This page has been archived on the Web.</a></p>' .
+      $content->find('div#archived',0)->outertext.
+      '</section>';
+
+
+      
+      
+    }
+   
+
+
+
     //modify $myURL into path
     $path = rtrim(str_replace('https://www.nuclearsafety.gc.ca','',$myURL), '.cfm');
     $translation_path = str_replace('/eng/','/fra/',$path);
@@ -134,6 +175,35 @@ include('include/db.php');
       $img->class = "img-responsive";
      }
 
+
+     if ($html->find('div[id="archived"]',0)){
+
+
+
+      //include('archive-eng.php');
+      
+      $translation_content->find('div[id="archived"]',0)->innertext
+       = '';
+      
+      //$content->find('div#archived',0)->innertext = '';
+      
+      $translation_content->find('div#archived',0)->outertext
+       = '<section id="archived" class="alert alert-warning wb-inview" data-inview="archived-bnr">
+       <h2>Cette page Web a été archivée dans le Web</h2>
+       <p>L&rsquo;information dont il est indiqué qu&rsquo;elle est archivée est fournie à des fins de référence, de recherche ou de tenue de documents. Elle n&rsquo;est pas assujettie aux normes Web du gouvernement du Canada et elle n’a pas été modifiée ou mise à jour depuis son archivage. Pour obtenir cette information dans un autre format, veuillez communiquer avec nous.</p>
+     </section>
+     
+     <section id="archived-bnr" class="wb-overlay modal-content overlay-def wb-bar-t">
+       <header>
+         <h2 class="wb-inv">Archivée</h2>
+       </header>
+       <p><a href="#archived">Cette page Web a été archivée dans le Web.</a></p>' .
+      $translation_content->find('div#archived',0)->outertext.
+      '</section>';
+    }
+
+
+
     $content = str_replace('https://www.nuclearsafety.gc.ca/','/',$content);
     $translation_content = str_replace('https://www.nuclearsafety.gc.ca/','/',$translation_content);
     $title = str_replace(array_keys($characters), $characters, $title);
@@ -145,6 +215,8 @@ include('include/db.php');
     $content = str_replace('<div id="wb-main" role="main">', '', $content);
     $content = str_replace('<div class="span-6">', '', $content);
     $content = str_replace('<div class="span-8">', '', $content);
+    $content = str_replace('<p><img src="/dist/js/images/archived/warning.gif" alt="Warning" title="Warning" class="image-actual margin-bottom-none img-responsive" />This Web page has been archived on the Web.</p>',
+   '',$content);
     $content = preg_replace('#<h1 id="wb-cont">(.*?)<\/h1>#', '', $content);
     $content = str_replace(array_keys($replacements), $replacements, $content);
     $content = str_replace(($removals), '', $content);
@@ -171,6 +243,8 @@ include('include/db.php');
     $translation_content = str_replace('<div id="wb-main" role="main">', '', $translation_content);
     $translation_content = str_replace('<div class="span-6">', '', $translation_content);
     $translation_content = str_replace('<div class="span-8">', '', $translation_content);
+    $translation_content = str_replace('<p><img src="/dist/js/images/archived/warning.gif" alt="Avertissement" title="Avertissement" class="image-actual margin-bottom-none img-responsive" /> Cette page Web a &eacute;t&eacute; archiv&eacute;e dans le Web.</p>',
+   '',$translation_content);
     $translation_content = preg_replace('#<h1 id="wb-cont">(.*?)<\/h1>#', '', $translation_content);
     $translation_content = str_replace(array_keys($replacements), $replacements, $translation_content);
     $translation_content = str_replace(($removals), '', $translation_content);

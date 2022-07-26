@@ -79,5 +79,8 @@ $removals = array(
       "opacity-70",
       "opacity-80",
       "opacity-90",
+      "<div id=\"archived\" class=\"wet-boew-archived col-md-12\"></div>",
+      "<p><strong>Scroll down and the \"archived\" notice will fade in (at the top of your window)</strong></p>",
+      "<p><strong>Faites d&eacute;filer la page et l&rsquo;avis &ldquo;archiv&eacute;&rdquo; appara&icirc;t au haut de la fen&ecirc;tre.</strong></p>"
     );
 ?>

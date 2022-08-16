@@ -18,6 +18,14 @@ $gatsby = array(
     "<table class=\"\"" => "<table class=\"table table-bordered\"",
     "<table class=\"wb-tables table\"" => "<table class=\"table table-bordered\"",
     "allowfullscreen"=>"allowFullScreen",
-    "wet-boew-multimedia" => "wb-mltmd"
+    "wet-boew-multimedia" => "wb-mltmd",
+    "<div id=\"archived\"></div>" => "",
+    "This web page has been archived on the Web. </p>" => "",
+    "This Web page has been archived on the Web. </p>" => "",
+    "<a href=\"#archived\">This Web page has been archived on the Web</a>.</p>" => "",
+    "<p><span class=\"wb-icon-exclamation-alt\"></span>" => "",
+    "<a href=\"#archived\">Cette page Web a &eacute;t&eacute; archiv&eacute;e dans le Web</a>.</p>" => "",
+    "Cette page Web a &eacute;t&eacute; archiv&eacute;e dans le Web.</p>" => "",
+    "<p><img src=\"/dist/js/images/archived/warning.gif\" alt=\"Warning\" title=\"Warning\" class=\"image-actual mrgn-bttm-0 img-responsive\" /> This Web page has been archived on the Web.</p>" => ""
 );
       ?>

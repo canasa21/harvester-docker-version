@@ -70,7 +70,7 @@ li.current {
 
 ini_set('max_execution_time', '300');
 
-//$threshold = htmlspecialchars($_GET['threshold']);
+$threshold = htmlspecialchars($_GET['threshold']);
 
 
 include('simple_html_dom.php');
@@ -81,8 +81,8 @@ include('removals.php');
 include('include/db.php');
 
     //for batch pages
-    //$sql = "select id, url from externalPages WHERE ID BETWEEN $threshold";
-    $sql = "select id, url from externalPages WHERE ID IN(15,86)";
+    $sql = "select id, url from externalPages WHERE ID BETWEEN $threshold";
+    //$sql = "select id, url from externalPages WHERE ID IN(79,106,138,123,140,824,1152,1714,1718)";
 
     $result = $conn->query($sql);
 
@@ -91,8 +91,37 @@ include('include/db.php');
       $ID = $row['id'];
 
       $myURL = $row['url'];
+      $translation_myURL = str_replace('/eng/','/fra/',$myURL);
+
+
+       //check if url is good
+       $page_headers = @get_headers($myURL);
+       $translation_page_headers = @get_headers($translation_myURL);
+       if((!$page_headers || $page_headers[0] == 'HTTP/1.1 500 Internal Server Error') || (!$translation_page_headers || $translation_page_headers[0] == 'HTTP/1.1 500 Internal Server Error')){
+           $bad = $myURL.PHP_EOL;
+           $translation_bad = $translation_myURL.PHP_EOL;
+           file_put_contents('bad-url.txt','500 ' . $bad,FILE_APPEND);
+           file_put_contents('bad-url.txt','500 ' . $translation_bad,FILE_APPEND);
+       }
+       elseif((!$page_headers || $page_headers[0] == 'HTTP/1.1 400 Bad Request') || (!$translation_page_headers || $translation_page_headers[0] == 'HTTP/1.1 400 Bad Request')){
+           $bad = $myURL.PHP_EOL;
+           $translation_bad = $translation_myURL.PHP_EOL;
+           file_put_contents('bad-url.txt','400 ' . $bad,FILE_APPEND);
+           file_put_contents('bad-url.txt','400 ' . $translation_bad,FILE_APPEND);
+       }
+       elseif((!$page_headers || $page_headers[0] == 'HTTP/1.1 404 Not Found') || (!$translation_page_headers || $translation_page_headers[0] == 'HTTP/1.1 404 Not Found')){
+           $bad = $myURL.PHP_EOL;
+           $translation_bad = $translation_myURL.PHP_EOL;
+           file_put_contents('bad-url.txt','404 ' . $bad,FILE_APPEND);
+           file_put_contents('bad-url.txt','404 ' . $translation_bad,FILE_APPEND);
+       }
+       else{
       $html = file_get_html($myURL);
       $name = $ID;
+
+ if(!empty($html->find('div[id="wb-main"]',0))){
+
+
       $title = strip_tags($html->find('h1[id="wb-cont"]',0));
       $breadcrumbs = $html->find('div[id="gcwu-bc"]',0);
 
@@ -129,8 +158,8 @@ include('include/db.php');
       $content->find('div#archived',0)->outertext
        = '<section id="archived" class="alert alert-warning wb-inview" data-inview="archived-bnr"><h2>Archived information</h2>
       
-      <p>Archived information is provided for reference, research or recordkeeping purposes. It is not subject to the Government of Canada Web Standards and has not been altered or updated since it was archived. Please contact
-       us to request a format other than those available.</p>
+      <p>Archived information is provided for reference, research or recordkeeping purposes. It is not subject to the Government of Canada Web Standards and has not been altered or updated since it was archived. Please <a href="/eng/contact-us/">contact
+       us</a> to request a format other than those available.</p>
       
       </section>
       
@@ -160,7 +189,7 @@ include('include/db.php');
     $translation_path = str_replace('/eng/','/fra/',$path);
 
     //get URL and switch to French
-    $translation_myURL = str_replace('/eng/','/fra/',$myURL);
+    
     $translation_html = file_get_html($translation_myURL);
     $translation_title = strip_tags($translation_html->find('h1[id="wb-cont"]',0));
     $translation_breadcrumbs = $translation_html->find('div[id="gcwu-bc"]',0);
@@ -190,7 +219,7 @@ include('include/db.php');
       $translation_content->find('div#archived',0)->outertext
        = '<section id="archived" class="alert alert-warning wb-inview" data-inview="archived-bnr">
        <h2>Cette page Web a été archivée dans le Web</h2>
-       <p>L&rsquo;information dont il est indiqué qu&rsquo;elle est archivée est fournie à des fins de référence, de recherche ou de tenue de documents. Elle n&rsquo;est pas assujettie aux normes Web du gouvernement du Canada et elle n’a pas été modifiée ou mise à jour depuis son archivage. Pour obtenir cette information dans un autre format, veuillez communiquer avec nous.</p>
+       <p>L&rsquo;information dont il est indiqué qu&rsquo;elle est archivée est fournie à des fins de référence, de recherche ou de tenue de documents. Elle n&rsquo;est pas assujettie aux normes Web du gouvernement du Canada et elle n’a pas été modifiée ou mise à jour depuis son archivage. Pour obtenir cette information dans un autre format, veuillez <a href="/fra/contact-us/">communiquer avec nous</a>.</p>
      </section>
      
      <section id="archived-bnr" class="wb-overlay modal-content overlay-def wb-bar-t">
@@ -291,8 +320,9 @@ include('include/db.php');
       echo "Error: " . $sql . "<br>" . $conn->error;
     }
     //$conn->close();
-       
-    }
+  }}
+  }
+
     
     $conn->close();
 

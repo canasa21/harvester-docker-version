@@ -110,14 +110,21 @@ a:hover {
 </style>
 <body>
 
+<!--audio autoplay>
+  <source src="tah.mp3" type="audio/mpeg">
+</audio-->
+
     <p style="padding-top:30px;padding-bottom:30px;"><a class="buttonExport" href="top500.php">Main</a> <a class="buttonExport" href="upload.php">Upload URLs</a> <a class="buttonExport" href="export-js.php">Export English Pages</a> <a class="buttonExport" href="export-js-f.php">Export French Pages</a><p><a class="buttonExport" href="export-html.php">Export HTML English Pages</a> <a class="buttonExport" href="export-html-f.php">Export HTML French Pages</a></p>
+    <!--form id="batch" action="images.php" style="margin-top: 30px;"-->
+    <!-- images -->
     <form id="batch" action="start.php" style="margin-top: 30px;">
 
     <?php
     echo "<select name=\"threshold\" id=\"threshold\">";
-for ($i = 1; $i <= 2410; $i += 50)
+    //pages 2410/50/49 - images 4524/100/99
+for ($i = 1; $i <= 2346; $i += 100)
 {
-    $j = $i + 49;
+    $j = $i + 99;
     echo "<option value=\" $i AND $j \">$i to $j</option>";
 }
 echo "</select>";
